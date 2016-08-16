@@ -1,4 +1,4 @@
-flatiron-ipsum
+doughty-ipsum
 ==============
 
-Code to create a lorem ipsum text generator with words related to the Flatiron School. Uses JavaScript and jQuery only.
+Lorem Ipsum generator that uses the lyrics of poet/singer M. Doughty. Heavily based on https://github.com/meowist/flatiron-ipsum
