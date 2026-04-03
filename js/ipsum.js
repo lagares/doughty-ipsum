@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let sentences_per_paragraph = Math.floor(Math.random() * chosen_words.length) + 1;
       for (let j = 0; j < sentences_per_paragraph; j++) {
         let rnum = Math.floor(Math.random() * chosen_words.length);
-        paragraph += `${chosen_words[rnum]}.`;
+        paragraph += `${chosen_words[rnum]}. `;
       }
       paragraphs += `<p>${paragraph}</p>`;
     }
