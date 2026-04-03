@@ -5,15 +5,17 @@
   Input:    The lyrics, one verse per array element
   Options:  1. Soul Coughing songs only, solo songs only, or all combined
             2. Number of paragraphs of copy that result
-  Output: Doughty Ipsum!
+  Output:   Doughty Ipsum!
 
-  Note: The least computer-intensive thing to do here would be to take a bunch of lyrics, save them into one big array, choose a number from 0 to array.length-1 which then becomes the first sentence in the first paragraph, then repeat x number of times to form a paragraph, then repeat y number of times according to the desired number of paragraphs. There is absolutely no need to go shuffling an indeterminately large number of lyric verses, then store them somewhere, then pick paragraphs out from the result, when picking random indexes accomplishes the same thing with much less effort.
+  Note: The least computer-intensive thing to do here would be to take a bunch of lyrics, save them into one big array, choose a number from 0 to array.length-1 which then becomes the first sentence in the first paragraph, then repeat x number of times to form a paragraph, then repeat y number of times according to the desired number of paragraphs. 
+  
+  There is absolutely no need to go shuffling an indeterminately large number of lyric verses, then store them somewhere, then pick paragraphs out from the result -- which is what I did on the first version of this, oh so many years ago -- when picking random indexes accomplishes the same thing with much less effort.
+
+  I might make this generic to any delimited user input someday...
 
 **/
 
-//document ready is a safety precaution that makes sure all of the HTML document has loaded before we try to add behavior.
 document.addEventListener("DOMContentLoaded", () => {
-  //One array per song
   let true_dreams_of_wichita = [
     "Signal got lost to the satellite",
     "Got lost in the ride up to the plunge down",
@@ -129,22 +131,18 @@ document.addEventListener("DOMContentLoaded", () => {
   let only_sc = true_dreams_of_wichita.concat(super_bon_bon, circles, screenwriters_blues, idiot_kings);
   let words_all = no_sc.concat(only_sc);
 
-  //Start event listener for click
   const form = document.getElementById("ipsum-form");
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    let paragraphs = ""; // multiple paragraphs, what the user sees
+    let paragraphs = "";
 
-    //Determine which of the check boxes is checked
-    let chosen_button = document.querySelector("#ipsum-form input[name='choice']:checked").value; // "everything" is checked in HTML by default
+    let chosen_button = document.querySelector("#ipsum-form input[name='choice']:checked").value; // "everything" is checked in HTML by default so this always has a value
 
     //Grab the paragraph number the user enters
     let num_of_pars = document.getElementById("paragraph_count").value || 1; // at least one paragraph, no?
 
-    //This will hold all the lyrics the user has chosen
     let chosen_words = [];
 
-    // which array of words to show the user
     if (chosen_button == "everything") {
       chosen_words = words_all;
     } else if (chosen_button == "no-sc") {
@@ -155,11 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let i = 0; i < num_of_pars; i++) {
       let paragraph = "";
-      //Vary the number of sentences in each paragraph randomly
       let sentences_per_paragraph = Math.floor(Math.random() * chosen_words.length) + 1;
       for (let j = 0; j < sentences_per_paragraph; j++) {
-        let rnum = Math.floor(Math.random() * chosen_words.length); // random num from 0 to arr.len
-        paragraph += `${chosen_words[rnum]}.`; // concatenate a random verse
+        let rnum = Math.floor(Math.random() * chosen_words.length);
+        paragraph += `${chosen_words[rnum]}.`;
       }
       paragraphs += `<p>${paragraph}</p>`;
     }
