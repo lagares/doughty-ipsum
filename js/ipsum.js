@@ -136,15 +136,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let paragraphs = ""; // multiple paragraphs, what the user sees
 
     //Determine which of the check boxes is checked
-    let chosen_button = document.querySelector("#ipsum-form input[name='choice']:checked").value;
+    let chosen_button = document.querySelector("#ipsum-form input[name='choice']:checked").value; // "everything" is checked in HTML by default
 
     //Grab the paragraph number the user enters
-    let num_of_pars = document.getElementById("paragraph_count").value;
+    let num_of_pars = document.getElementById("paragraph_count").value || 1; // at least one paragraph, no?
 
     //This will hold all the lyrics the user has chosen
     let chosen_words = [];
 
-    //ELSE IF determines which array of words to show the user
+    // which array of words to show the user
     if (chosen_button == "everything") {
       chosen_words = words_all;
     } else if (chosen_button == "no-sc") {
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < num_of_pars; i++) {
       let paragraph = "";
       //Vary the number of sentences in each paragraph randomly
-      let sentences_per_paragraph = Math.floor(Math.random() * chosen_words.length);
+      let sentences_per_paragraph = Math.floor(Math.random() * chosen_words.length) + 1;
       for (let j = 0; j < sentences_per_paragraph; j++) {
         let rnum = Math.floor(Math.random() * chosen_words.length); // random num from 0 to arr.len
         paragraph += `${chosen_words[rnum]}.`; // concatenate a random verse
